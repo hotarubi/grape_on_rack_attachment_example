@@ -1,6 +1,7 @@
 #!/usr/bin/env rake
 require File.expand_path('../environment', __FILE__)
 require File.expand_path('../lib/exts/rails', __FILE__)
+require File.expand_path('../db/seeds', __FILE__)
 require 'active_support/core_ext/string/strip'
 
 task :rails_env do
@@ -14,6 +15,7 @@ namespace :db do
   DatabaseTasks.database_configuration = YAML.load(File.read('config/database.yml'))
   DatabaseTasks.db_dir = 'db'
   DatabaseTasks.root = Application.config.root
+  DatabaseTasks.seed_loader = SeedLoader
 end
 
 Rake.load_rakefile "active_record/railties/databases.rake"
